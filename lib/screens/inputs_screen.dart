@@ -27,33 +27,43 @@ class InputsScreen extends StatelessWidget {
           child: Form(
             key: myFormKey,
             child: Column(children: [
-              const CustomInputField(
-                  labelText: 'Nombre tia',
-                  hintText: 'Nombre de usuario',
-                  keyboardType: TextInputType.name),
+              CustomInputField(
+                labelText: 'Nombre tia',
+                hintText: 'Nombre de usuario',
+                keyboardType: TextInputType.name,
+                formProperty: 'first_name',
+                formValues: formValues,
+              ),
               const SizedBox(
                 height: 30,
               ),
-              const CustomInputField(
-                  labelText: 'Apellido',
-                  hintText: 'Apellido de usuario',
-                  keyboardType: TextInputType.name),
+              CustomInputField(
+                labelText: 'Apellido',
+                hintText: 'Apellido de usuario',
+                keyboardType: TextInputType.name,
+                formProperty: 'last_name',
+                formValues: formValues,
+              ),
               const SizedBox(
                 height: 30,
               ),
-              const CustomInputField(
+              CustomInputField(
                 labelText: 'Email',
                 hintText: 'Correo del usuario',
                 keyboardType: TextInputType.emailAddress,
+                formProperty: 'email',
+                formValues: formValues,
               ),
               const SizedBox(
                 height: 30,
               ),
-              const CustomInputField(
+              CustomInputField(
                 labelText: 'Contraseña',
                 hintText: 'Contraseña',
                 keyboardType: TextInputType.visiblePassword,
                 obscureText: true,
+                formProperty: 'password',
+                formValues: formValues,
               ),
               const SizedBox(
                 height: 30,
@@ -66,6 +76,7 @@ class InputsScreen extends StatelessWidget {
 
                       print('Formulario no válido');
                     }
+                    print(formValues);
                   },
                   child: const SizedBox(
                       width: double.infinity,
