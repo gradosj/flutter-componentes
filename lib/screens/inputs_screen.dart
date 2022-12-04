@@ -6,6 +6,15 @@ class InputsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> myFormKey = GlobalKey<FormState>();
+
+    final Map<String, String> formValues = {
+      'first_name': 'Fernando',
+      'last_name': 'Herrera',
+      'email': 'Jose',
+      'password': '12345',
+      'role:': 'Admin'
+    };
     return Scaffold(
       appBar: AppBar(
         actions: [],
@@ -15,40 +24,54 @@ class InputsScreen extends StatelessWidget {
         // permite hacer scrolls
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Column(children: [
-            const CustomInputField(
-                labelText: 'Nombre tia',
-                hintText: 'Nombre de usuario',
-                keyboardType: TextInputType.name),
-            const SizedBox(
-              height: 30,
-            ),
-            const CustomInputField(
-                labelText: 'Apellido',
-                hintText: 'Apellido de usuario',
-                keyboardType: TextInputType.name),
-            const SizedBox(
-              height: 30,
-            ),
-            const CustomInputField(
-              labelText: 'Email',
-              hintText: 'Correo del usuario',
-              keyboardType: TextInputType.emailAddress,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            const CustomInputField(
-              labelText: 'Contraseña',
-              hintText: 'Contraseña',
-              keyboardType: TextInputType.visiblePassword,
-              obscureText: true,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            ElevatedButton(onPressed: () {}, child: Text('Guardar'))
-          ]),
+          child: Form(
+            key: myFormKey,
+            child: Column(children: [
+              const CustomInputField(
+                  labelText: 'Nombre tia',
+                  hintText: 'Nombre de usuario',
+                  keyboardType: TextInputType.name),
+              const SizedBox(
+                height: 30,
+              ),
+              const CustomInputField(
+                  labelText: 'Apellido',
+                  hintText: 'Apellido de usuario',
+                  keyboardType: TextInputType.name),
+              const SizedBox(
+                height: 30,
+              ),
+              const CustomInputField(
+                labelText: 'Email',
+                hintText: 'Correo del usuario',
+                keyboardType: TextInputType.emailAddress,
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              const CustomInputField(
+                labelText: 'Contraseña',
+                hintText: 'Contraseña',
+                keyboardType: TextInputType.visiblePassword,
+                obscureText: true,
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                    if (!myFormKey.currentState!.validate()) {
+                      //* el primer ! es para negar la condicion, el segundo indica que siempre tendremos un estado
+
+                      print('Formulario no válido');
+                    }
+                  },
+                  child: const SizedBox(
+                      width: double.infinity,
+                      child: Center(child: Text('Guardar'))))
+            ]),
+          ),
         ),
       ),
     );
